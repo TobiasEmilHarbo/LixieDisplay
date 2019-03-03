@@ -4,6 +4,7 @@
 #include "Arduino.h"
 #include "Adafruit_NeoPixel.h"
 #include "LixieDigitPosition.h"
+#include "LixieDigitTransition.h"
 
 class LixieDisplay
 {
@@ -13,6 +14,7 @@ class LixieDisplay
     int pixelCount();
     void setColor(uint32_t color);
     void setColors(uint32_t colors[]);
+    void setTransitionForDigit(int position, LixieDigitTransition* transition);
     void display(String number);
     void turnOff();
   private:

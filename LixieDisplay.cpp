@@ -1,6 +1,7 @@
 #include "Arduino.h"
 #include "LixieDisplay.h"
 #include "LixieDigitPosition.h"
+#include "LixieDigitTransition.h"
 
 #include "Adafruit_NeoPixel.h"
 
@@ -54,19 +55,25 @@ void LixieDisplay::setColors(uint32_t colors[])
 
 		_digitPositions[i]->setColor(colors[i]);
 
-		Serial.print("color[");
-		Serial.print(i);
-		Serial.print("] is not NULL: ");
-		Serial.println((colors[i] != NULL));
-		Serial.println(colors[i]);
+		// Serial.print("color[");
+		// Serial.print(i);
+		// Serial.print("] is not NULL: ");
+		// Serial.println((colors[i] != NULL));
+		// Serial.println(colors[i]);
 		
-		Serial.print("_digitPositions[");
-		Serial.print(i);
-		Serial.print("] is not NULL: ");
-		Serial.println((_digitPositions[i] != NULL));
+		// Serial.print("_digitPositions[");
+		// Serial.print(i);
+		// Serial.print("] is not NULL: ");
+		// Serial.println((_digitPositions[i] != NULL));
 	}
 
 	_pixels->show();
+}
+
+void LixieDisplay::setTransitionForDigit(int position, LixieDigitTransition * transition)
+{
+	if (_digitPositions[position] != NULL)
+		_digitPositions[position]->setTransition(transition);
 }
 
 void LixieDisplay::display(String number)

@@ -2,24 +2,27 @@
 #define LixieDigitPosition_h
 
 #include "Arduino.h"
-#include "Adafruit_NeoPixel.h"
 #include "LixieDigit.h"
+#include "Adafruit_NeoPixel.h"
+#include "LixieDigitTransition.h"
 
 class LixieDigitPosition
 {
   public:
     LixieDigitPosition(int index, int digitWidth, int base, uint32_t color);
-    void setPixels(Adafruit_NeoPixel * pixels);
+    void setPixels(Adafruit_NeoPixel* pixels);
     int pixelCount();
+    void setTransition(LixieDigitTransition* transition);
     void setColor(uint32_t color);
     void display(int number);
   private:
   	int _index;
     int _number;
   	int _startPixel;
+    LixieDigitTransition* _transition;
     uint32_t _color;
-  	LixieDigit * _digits[10];
-    Adafruit_NeoPixel * _pixels;
+  	LixieDigit* _digits[10];
+    Adafruit_NeoPixel* _pixels;
 };
 
 #endif

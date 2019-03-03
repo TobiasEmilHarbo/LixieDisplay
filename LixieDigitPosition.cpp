@@ -1,7 +1,9 @@
 #include "Arduino.h"
-#include "Adafruit_NeoPixel.h"
-#include "LixieDigitPosition.h"
 #include "LixieDigit.h"
+#include "LixieDigitPosition.h"
+#include "LixieDigitTransition.h"
+
+#include "Adafruit_NeoPixel.h"
 
 LixieDigitPosition::LixieDigitPosition(int index, int digitWidth, int base, uint32_t color)
 {
@@ -41,6 +43,12 @@ void LixieDigitPosition::setColor(uint32_t color)
 {
 	_color = color;
 	_digits[_number]->turnOn(color);
+}
+
+void LixieDigitPosition::setTransition(LixieDigitTransition* transition)
+{
+	transition->setDigits();
+	_transition = transition;
 }
 
 int LixieDigitPosition::pixelCount()
