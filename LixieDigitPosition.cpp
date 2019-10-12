@@ -31,7 +31,7 @@ void LixieDigitPosition::setPixels(Adafruit_NeoPixel * pixels)
 	}
 }
 
-void LixieDigitPosition::display(int number)
+void LixieDigitPosition::update(int number)
 {
 	_number = number;
 

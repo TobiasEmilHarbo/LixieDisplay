@@ -15,7 +15,7 @@ class LixieDisplay
     void setColor(uint32_t color);
     void setColors(uint32_t colors[]);
     void setTransitionForDigit(int position, LixieDigitTransition* transition);
-    void display(String number);
+    void update(String number);
     void turnOff();
   private:
     int _numOfDigits;

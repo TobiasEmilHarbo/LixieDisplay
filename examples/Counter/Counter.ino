@@ -55,7 +55,7 @@ void setup()
 
 	while (WiFi.status() != WL_CONNECTED)
 	{
-		lixie.display(String(counter));
+		lixie.update(String(counter));
 		counter++;
 		delay(500);
 	}
@@ -82,7 +82,7 @@ void loop()
 
 		Serial.println(number);
 
-		lixie.display(number);
+		lixie.update(number);
 
 		counter++;
 

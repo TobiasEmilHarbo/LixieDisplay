@@ -76,7 +76,7 @@ void LixieDisplay::setTransitionForDigit(int position, LixieDigitTransition * tr
 		_digitPositions[position]->setTransition(transition);
 }
 
-void LixieDisplay::display(String number)
+void LixieDisplay::update(String number)
 {
 	
 	this->turnOff();
@@ -94,7 +94,7 @@ void LixieDisplay::display(String number)
 		int digit = digits[i] - '0'; // convert char to int
 
 		if (_digitPositions[padding+i] != NULL)
-	 		_digitPositions[padding+i]->display(digit);
+	 		_digitPositions[padding+i]->update(digit);
 	}
 
 	_pixels->show();
