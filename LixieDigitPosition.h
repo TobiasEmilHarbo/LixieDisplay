@@ -15,6 +15,7 @@ class LixieDigitPosition
     void setTransition(LixieDigitTransition* transition);
     void setColor(uint32_t color);
     void update(int number);
+    void tick();
   private:
   	int _index;
     int _number;

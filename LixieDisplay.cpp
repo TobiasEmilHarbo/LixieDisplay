@@ -78,8 +78,6 @@ void LixieDisplay::setTransitionForDigit(int position, LixieDigitTransition * tr
 
 void LixieDisplay::update(String number)
 {
-	// this->turnOff();
-
 	int digitCount = number.length();
 	char digits[digitCount];
 
@@ -117,5 +115,14 @@ void LixieDisplay::turnOff()
 	for (int i = 0; i < this->pixelCount(); ++i)
 	{
 		_pixels->setPixelColor(i, 0);
+	}
+}
+
+void LixieDisplay::tick()
+{
+	for (int i = 0; i < _numOfDigits; ++i)
+	{
+		if(_digitPositions[i] == NULL) return;
+			_digitPositions[i]->tick();
 	}
 }

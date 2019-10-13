@@ -9,10 +9,12 @@ class LixieDigitTransition
   public:
     LixieDigitTransition();
     void transitionTo(LixieDigit* digits[10], int number, uint32_t color);
+    void tick();
   private:
     uint32_t _color;
-    LixieDigit* _digits[10];
     int _lastNumber;
+    unsigned long _lastTick;
+    int tickLength;
 };
 
 #endif

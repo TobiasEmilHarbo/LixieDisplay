@@ -49,7 +49,7 @@ void setup()
 
 	lixie.setup(&pixels);
 
-	lixie.setTransitionForDigit(1, new LixieDigitTransition());
+	//lixie.setTransitionForDigit(1, new LixieDigitTransition());
 
 	WiFi.begin(ssid, password);
 
@@ -90,4 +90,6 @@ void loop()
 
 		//Serial.println(timeClient.getFormattedTime());
 	}
+
+	lixie.tick();
 }

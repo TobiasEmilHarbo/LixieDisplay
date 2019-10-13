@@ -12,6 +12,7 @@ LixieDigitPosition::LixieDigitPosition(int index, int digitWidth, int base, uint
 	_index = index;
 	_color = color;
 	_startPixel = index * digitWidth * base;
+	_transition = new LixieDigitTransition();
 	
 	for (int i = 0; i < base; ++i)
 	{
@@ -34,7 +35,7 @@ void LixieDigitPosition::setPixels(Adafruit_NeoPixel * pixels)
 void LixieDigitPosition::update(int number)
 {
 	_number = number;
-	_transition->transitionTo(_digits, _number, _color);
+	_transition->transitionTo(_digits, number, _color);
 }
 
 void LixieDigitPosition::setColor(uint32_t color)
@@ -59,4 +60,10 @@ int LixieDigitPosition::pixelCount()
 	}
 
 	return count;
+}
+
+void LixieDigitPosition::tick()
+{
+	if(_transition != NULL)
+		_transition->tick();
 }

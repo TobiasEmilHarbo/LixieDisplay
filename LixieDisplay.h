@@ -10,17 +10,18 @@ class LixieDisplay
 {
   public:
     LixieDisplay(int digits);
-    void setup(Adafruit_NeoPixel * pixels);
+    void setup(Adafruit_NeoPixel* pixels);
     int pixelCount();
     void setColor(uint32_t color);
     void setColors(uint32_t colors[]);
     void setTransitionForDigit(int position, LixieDigitTransition* transition);
     void update(String number);
     void turnOff();
+    void tick();
   private:
     int _numOfDigits;
-    Adafruit_NeoPixel * _pixels;
-    LixieDigitPosition * _digitPositions[10];
+    Adafruit_NeoPixel* _pixels;
+    LixieDigitPosition* _digitPositions[10];
 };
 
 #endif
