@@ -12,8 +12,10 @@ class LixieDigitTransition
     void tick();
   private:
     uint32_t _color;
-    int _lastNumber;
+    int _from;
+    int _to;
     unsigned long _lastTick;
+    LixieDigit** _digits;
     int tickLength;
 };
 
