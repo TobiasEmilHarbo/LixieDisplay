@@ -34,9 +34,7 @@ void LixieDigitPosition::setPixels(Adafruit_NeoPixel * pixels)
 void LixieDigitPosition::update(int number)
 {
 	_number = number;
-
-	if (_digits[number] != NULL)
-		_digits[number]->turnOn(_color);
+	_transition->transitionTo(_digits, _number, _color);
 }
 
 void LixieDigitPosition::setColor(uint32_t color)
@@ -47,7 +45,6 @@ void LixieDigitPosition::setColor(uint32_t color)
 
 void LixieDigitPosition::setTransition(LixieDigitTransition* transition)
 {
-	transition->setDigits();
 	_transition = transition;
 }
 

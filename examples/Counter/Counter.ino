@@ -86,6 +86,8 @@ void loop()
 
 		counter++;
 
+		if(counter > 9) counter = 0;
+
 		//Serial.println(timeClient.getFormattedTime());
 	}
 }
