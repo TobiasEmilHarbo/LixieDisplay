@@ -12,6 +12,7 @@ class LixieDigitTransition
   private:
     uint32_t _color;
     LixieDigit* _digits[10];
+    int _lastNumber;
 };
 
 #endif

@@ -78,8 +78,7 @@ void LixieDisplay::setTransitionForDigit(int position, LixieDigitTransition * tr
 
 void LixieDisplay::update(String number)
 {
-	
-	this->turnOff();
+	// this->turnOff();
 
 	int digitCount = number.length();
 	char digits[digitCount];

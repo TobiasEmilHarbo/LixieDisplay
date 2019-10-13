@@ -12,10 +12,16 @@ void LixieDigitTransition::transitionTo(LixieDigit* digits[10], int number, uint
 {
 	Serial.println("LixieDigitTransition::transitionTo");
 	
+	for (int i = 0; i < 10; ++i)
+	{
+		if (digits[i] != NULL)
+		 	digits[i]->turnOn(0);
+	}
+
 	if (digits[number] != NULL)
 	{
 		digits[number]->turnOn(color);
 	}
 
-	_lastNumber = number;
+	// _lastNumber = number;
 }
