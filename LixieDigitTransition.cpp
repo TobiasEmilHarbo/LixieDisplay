@@ -7,6 +7,8 @@ LixieDigitTransition::LixieDigitTransition()
 	Serial.begin(115200);
 }
 
+int frame [10] = {};
+
 void LixieDigitTransition::transitionTo(LixieDigit* digits[10], int number, uint32_t color)
 {
 	_color 	= color;
@@ -21,7 +23,6 @@ void LixieDigitTransition::tick()
 	if (millis() > _lastTick + tickLength)
 	{
 		_lastTick = millis();
-		Serial.println("LixieDigitTransition::tick");		
 	
 		for (int i = 0; i < 10; ++i)
 		{

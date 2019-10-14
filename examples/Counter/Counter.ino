@@ -38,8 +38,8 @@ int UTC = 1; // timezone
 
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", UTC * 3600, 60000);
 
-int oneSec = 1000;
 unsigned long lastSecTick = 0;
+int oneSec = 1000;
 
 int counter = 0;
 
@@ -53,7 +53,7 @@ void setup()
 
 	WiFi.begin(ssid, password);
 
-	while (WiFi.status() != WL_CONNECTED)
+	while ( WiFi.status() != WL_CONNECTED )
 	{
 		lixie.update(String(counter));
 		counter++;
