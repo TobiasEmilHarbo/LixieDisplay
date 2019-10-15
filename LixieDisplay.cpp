@@ -94,7 +94,7 @@ void LixieDisplay::update(String number)
 	 		_digitPositions[padding+i]->update(digit);
 	}
 
-	_pixels->show();
+	//_pixels->show();
 }
 
 int LixieDisplay::pixelCount()

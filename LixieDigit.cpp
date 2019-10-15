@@ -26,6 +26,11 @@ void LixieDigit::turnOn(uint32_t newColor)
 	}
 }
 
+void LixieDigit::turnOff()
+{
+	this->turnOn(0);
+}
+
 int LixieDigit::getWidth()
 {
 	return _width;

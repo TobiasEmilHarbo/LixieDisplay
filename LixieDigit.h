@@ -11,6 +11,7 @@ class LixieDigit
     LixieDigit(int index, int width);
     void setPixels(Adafruit_NeoPixel * pixels);
     void turnOn(uint32_t color);
+    void turnOff();
     uint32_t getColor();
     int getWidth();
   private:
