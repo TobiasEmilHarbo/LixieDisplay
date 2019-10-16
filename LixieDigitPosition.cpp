@@ -3,6 +3,7 @@
 #include "LixieDigitPosition.h"
 #include "LixieDigitTransition.h"
 #include "TransitionRollAround.h"
+#include "TransitionRoll.h"
 
 #include "Adafruit_NeoPixel.h"
 
@@ -13,7 +14,7 @@ LixieDigitPosition::LixieDigitPosition(int index, int digitWidth, int base, uint
 	_index = index;
 	_color = color;
 	_startPixel = index * digitWidth * base;
-	_transition = new TransitionRollAround();
+	_transition = new TransitionRoll();
 	
 	for (int i = 0; i < base; ++i)
 	{
@@ -68,5 +69,6 @@ void LixieDigitPosition::tick()
 	if(_transition != NULL)
 		_transition->tick();
 
-	_pixels->show();
+	if(_transition->isDirty())
+		_pixels->show();
 }

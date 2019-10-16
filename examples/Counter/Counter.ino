@@ -78,7 +78,9 @@ void loop()
 		int s = timeClient.getSeconds();
 
 		char number[6];
-		sprintf(number, "%02d%02d", counter, 0);
+		// sprintf(number, "%02d%02d", m, s);
+		// sprintf(number, "%02d%02d", counter, 0);
+		sprintf(number, "%03d", random(1000));
 
 		Serial.println(number);
 
@@ -86,7 +88,7 @@ void loop()
 
 		counter++;
 
-		if(counter > 9) counter = 0;
+		if(counter > 99) counter = 0;
 
 		//Serial.println(timeClient.getFormattedTime());
 	}

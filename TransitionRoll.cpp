@@ -1,14 +1,14 @@
 #include "Arduino.h"
 #include "LixieDigit.h"
-#include "TransitionRollAround.h"
+#include "TransitionRoll.h"
 #include "LixieDigitTransition.h"
 
-TransitionRollAround::TransitionRollAround()
+TransitionRoll::TransitionRoll()
 {
 	Serial.begin(115200);
 }
 
-void TransitionRollAround::transitionTo(LixieDigit* digits[10], int number, uint32_t color)
+void TransitionRoll::transitionTo(LixieDigit* digits[10], int number, uint32_t color)
 {
 	_color 	= color;
 	_digits = digits;
@@ -18,7 +18,7 @@ void TransitionRollAround::transitionTo(LixieDigit* digits[10], int number, uint
 	_transitionIndex = _fromIndex;
 }
 
-void TransitionRollAround::tick()
+void TransitionRoll::tick()
 {
 	int tickLength = 20;
 
@@ -26,11 +26,12 @@ void TransitionRollAround::tick()
 	{
     	_lastTick = millis();
 
-		if (_transitionIndex == _toIndex) return;
+		if(_transitionIndex == _toIndex) return;
 
-		_transitionIndex--;
-		if (_transitionIndex < 0) _transitionIndex = 9;
-		
+		int incrementer = (_fromIndex > _toIndex) ? -1 : 1;
+
+		_transitionIndex += incrementer;
+
 		for (int i = 0; i < 10; ++i)
 		{
 			if (_digits[i] != NULL)
