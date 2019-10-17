@@ -15,20 +15,29 @@ void LixieDigit::setPixels(Adafruit_NeoPixel * pixels)
 	_pixels = pixels;
 }
 
-void LixieDigit::turnOn(uint32_t newColor)
+void LixieDigit::setColor(uint32_t color)
 {
-	if(this->getColor() == newColor) return;
+	_color = color;
+	if(_on) this->_changeColor(color);
+}
 
-	for (int i = 0; i < _width; ++i)
-	{
-		int pixelIndex = (_digitIndex + i);
-		_pixels->setPixelColor(pixelIndex, newColor);
-	}
+void LixieDigit::turnOn(uint32_t color)
+{
+	_on = true;
+
+	if(color == NULL) return;
+	
+	_color = color;
+
+	if(this->getColor() == _color) return;
+	
+	this->_changeColor(_color);
 }
 
 void LixieDigit::turnOff()
 {
-	this->turnOn(0);
+	_on = false;
+	this->_changeColor(0);
 }
 
 int LixieDigit::getWidth()
@@ -39,4 +48,13 @@ int LixieDigit::getWidth()
 uint32_t LixieDigit::getColor()
 {
 	return _pixels->getPixelColor(_digitIndex);
+}
+
+void LixieDigit::_changeColor(uint32_t color)
+{
+	for (int i = 0; i < _width; ++i)
+	{
+		int pixelIndex = (_digitIndex + i);
+		_pixels->setPixelColor(pixelIndex, color);
+	}
 }

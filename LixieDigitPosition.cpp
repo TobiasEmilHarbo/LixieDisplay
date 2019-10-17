@@ -1,11 +1,12 @@
 #include "Arduino.h"
+#include "Adafruit_NeoPixel.h"
+
 #include "LixieDigit.h"
 #include "LixieDigitPosition.h"
 #include "LixieDigitTransition.h"
+#include "LixieDigitColorEffect.h"
 #include "TransitionRollAround.h"
 #include "TransitionRoll.h"
-
-#include "Adafruit_NeoPixel.h"
 
 LixieDigitPosition::LixieDigitPosition(int index, int digitWidth, int base, uint32_t color)
 {
@@ -14,13 +15,15 @@ LixieDigitPosition::LixieDigitPosition(int index, int digitWidth, int base, uint
 	_index = index;
 	_color = color;
 	_startPixel = index * digitWidth * base;
-	_transition = new TransitionRoll();
 	
 	for (int i = 0; i < base; ++i)
 	{
 		int digitIndex = (i * digitWidth) + _startPixel;
 	 	_digits[i] = new LixieDigit(digitIndex, digitWidth);
 	}
+
+	_transition 	= new TransitionRollAround();
+	_colorEffect 	= new LixieDigitColorEffect(_digits);
 }
 
 void LixieDigitPosition::setPixels(Adafruit_NeoPixel * pixels)
@@ -69,6 +72,9 @@ void LixieDigitPosition::tick()
 	if(_transition != NULL)
 		_transition->tick();
 
-	if(_transition->isDirty())
+	if(_colorEffect != NULL)
+		_colorEffect->tick();
+
+	if(_transition->isDirty() || _colorEffect->isDirty())
 		_pixels->show();
 }

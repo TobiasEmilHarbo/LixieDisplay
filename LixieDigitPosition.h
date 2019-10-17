@@ -5,6 +5,7 @@
 #include "LixieDigit.h"
 #include "Adafruit_NeoPixel.h"
 #include "LixieDigitTransition.h"
+#include "LixieDigitColorEffect.h"
 
 class LixieDigitPosition
 {
@@ -20,6 +21,7 @@ class LixieDigitPosition
   	int _index;
     int _number;
   	int _startPixel;
+    LixieDigitColorEffect* _colorEffect;
     LixieDigitTransition* _transition;
     uint32_t _color;
   	LixieDigit* _digits[10];

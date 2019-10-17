@@ -79,8 +79,8 @@ void loop()
 
 		char number[6];
 		// sprintf(number, "%02d%02d", m, s);
-		// sprintf(number, "%02d%02d", counter, 0);
-		sprintf(number, "%03d", random(1000));
+		sprintf(number, "%02d%02d", counter, 0);
+		// sprintf(number, "%03d", random(1000));
 
 		Serial.println(number);
 
