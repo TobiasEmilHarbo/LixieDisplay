@@ -28,7 +28,7 @@ void LixieDisplay::setup(Adafruit_NeoPixel * pixels)
 	for (int i = 0; i < _numOfDigits; ++i)
 	{
 		if (_digitPositions[i] != NULL)
-	 		_digitPositions[i]->setPixels(_pixels);
+	 		_digitPositions[i]->setup(_pixels);
 	}
 
 	_pixels->setBrightness(50);
@@ -93,8 +93,6 @@ void LixieDisplay::update(String number)
 		if (_digitPositions[padding+i] != NULL)
 	 		_digitPositions[padding+i]->update(digit);
 	}
-
-	//_pixels->show();
 }
 
 int LixieDisplay::pixelCount()
@@ -120,9 +118,15 @@ void LixieDisplay::turnOff()
 
 void LixieDisplay::tick()
 {
+	bool update = false;
+
 	for (int i = 0; i < _numOfDigits; ++i)
 	{
 		if(_digitPositions[i] == NULL) return;
-			_digitPositions[i]->tick();
+
+		_digitPositions[i]->tick();
+		update = (_digitPositions[i]->isDirty() || update);
 	}
+
+	if(update) _pixels->show();
 }

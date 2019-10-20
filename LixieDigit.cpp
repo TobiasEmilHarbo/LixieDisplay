@@ -15,19 +15,22 @@ void LixieDigit::setPixels(Adafruit_NeoPixel * pixels)
 	_pixels = pixels;
 }
 
-void LixieDigit::setColor(uint32_t color)
+void LixieDigit::setColor(int r, int g, int b)
 {
-	_color = color;
-	if(_on) this->_changeColor(color);
+	if(_pixels == NULL) return;
+
+	_color = _pixels->Color(r,g,b);
+
+	if(_on) this->_changeColor(_color);
 }
 
 void LixieDigit::turnOn(uint32_t color)
 {
 	_on = true;
 
-	if(color == NULL) return;
+	//if(color == NULL) return;
 	
-	_color = color;
+	_color = (color != NULL) ? color : _color;
 
 	if(this->getColor() == _color) return;
 	

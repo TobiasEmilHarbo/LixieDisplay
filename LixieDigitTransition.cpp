@@ -7,9 +7,8 @@ LixieDigitTransition::LixieDigitTransition()
 	Serial.begin(115200);
 }
 
-void LixieDigitTransition::transitionTo(LixieDigit* digits[10], int number, uint32_t color)
+void LixieDigitTransition::transitionTo(LixieDigit* digits[10], int number)
 {
-	_color 	= color;
 	_digits = digits;
 
 	_fromIndex 	= _toIndex;
@@ -19,18 +18,24 @@ void LixieDigitTransition::transitionTo(LixieDigit* digits[10], int number, uint
 
 void LixieDigitTransition::tick()
 {
+	_dirty = false;
+
 	if(_transitionIndex == _toIndex) return;
 
 	for (int i = 0; i < 10; ++i)
 	{
-		if (_digits[i] != NULL)
-			_digits[i]->turnOff();
+		if (_digits[i] == NULL)
+			break;
+
+		if(i == _toIndex) _digits[i]->turnOn();
+		else _digits[i]->turnOff();
 	}
 
-	if (_digits[_toIndex] != NULL)
-		_digits[_toIndex]->turnOn(_color);
+	// if (_digits[_toIndex] != NULL)
+	// 	_digits[_toIndex]->turnOn();
 
 	_transitionIndex = _toIndex;
+
 	_dirty = true;
 }
 

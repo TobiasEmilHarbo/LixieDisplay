@@ -9,12 +9,10 @@ class TransitionRollAround: public LixieDigitTransition
 {
   public:
     TransitionRollAround();
-    void transitionTo(LixieDigit* digits[10], int number, uint32_t color) override;
+    void transitionTo(LixieDigit* digits[10], int number) override;
     void tick() override;
 
   public:
-    unsigned long _lastTick;
-    int tickLength;
 };
 
 #endif

@@ -11,11 +11,13 @@ class LixieDigitPosition
 {
   public:
     LixieDigitPosition(int index, int digitWidth, int base, uint32_t color);
+    void setup(Adafruit_NeoPixel* pixels);
     void setPixels(Adafruit_NeoPixel* pixels);
     int pixelCount();
     void setTransition(LixieDigitTransition* transition);
     void setColor(uint32_t color);
     void update(int number);
+    bool isDirty();
     void tick();
   private:
   	int _index;

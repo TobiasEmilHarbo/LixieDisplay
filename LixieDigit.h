@@ -13,7 +13,7 @@ class LixieDigit
     void turnOn(uint32_t color = NULL);
     void turnOff();
     uint32_t getColor();
-    void setColor(uint32_t color);
+    void setColor(int r, int g, int b);
     int getWidth();
   private:
   	int _width;

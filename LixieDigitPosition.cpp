@@ -3,8 +3,12 @@
 
 #include "LixieDigit.h"
 #include "LixieDigitPosition.h"
-#include "LixieDigitTransition.h"
+
 #include "LixieDigitColorEffect.h"
+#include "ColorEffectRainbow.h"
+
+
+#include "LixieDigitTransition.h"
 #include "TransitionRollAround.h"
 #include "TransitionRoll.h"
 
@@ -22,8 +26,25 @@ LixieDigitPosition::LixieDigitPosition(int index, int digitWidth, int base, uint
 	 	_digits[i] = new LixieDigit(digitIndex, digitWidth);
 	}
 
-	_transition 	= new TransitionRollAround();
+	// _colorEffect 	= new ColorEffectRainbow(_digits);
+}
+
+void LixieDigitPosition::setup(Adafruit_NeoPixel * pixels)
+{
+	_pixels = pixels;
+
+	for (int i = 0; i < sizeof(_digits) / sizeof(_digits[0]); ++i)
+	{
+		if (_digits[i] != NULL)
+		 	_digits[i]->setPixels(_pixels);
+	}
+
+	_transition 	= new LixieDigitTransition();
 	_colorEffect 	= new LixieDigitColorEffect(_digits);
+	
+	_colorEffect->setColor(244,212,66);
+
+	// _colorEffect 	= new LixieDigitColorEffect(_digits);
 }
 
 void LixieDigitPosition::setPixels(Adafruit_NeoPixel * pixels)
@@ -40,7 +61,7 @@ void LixieDigitPosition::setPixels(Adafruit_NeoPixel * pixels)
 void LixieDigitPosition::update(int number)
 {
 	_number = number;
-	_transition->transitionTo(_digits, number, _color);
+	_transition->transitionTo(_digits, number);
 }
 
 void LixieDigitPosition::setColor(uint32_t color)
@@ -74,7 +95,12 @@ void LixieDigitPosition::tick()
 
 	if(_colorEffect != NULL)
 		_colorEffect->tick();
+}
 
-	if(_transition->isDirty() || _colorEffect->isDirty())
-		_pixels->show();
+bool LixieDigitPosition::isDirty()
+{
+	return (
+			(_transition != NULL && _transition->isDirty())
+		||  (_colorEffect != NULL && _colorEffect->isDirty())
+	);
 }

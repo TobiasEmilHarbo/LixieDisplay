@@ -8,10 +8,13 @@ class LixieDigitColorEffect
 {
   public:
     LixieDigitColorEffect(LixieDigit* digits[10]);
-    void tick();
+    virtual void tick();
+    void setColor(int red, int green, int blue);
     bool isDirty();
-  private:
-    uint32_t _color;
+  protected:
+    unsigned long _lastTick;
+    LixieDigit** _digits;
+    int _tickLength;
     bool _dirty;
 };
 

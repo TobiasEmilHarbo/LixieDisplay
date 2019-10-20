@@ -82,7 +82,7 @@ void loop()
 		sprintf(number, "%02d%02d", counter, 0);
 		// sprintf(number, "%03d", random(1000));
 
-		Serial.println(number);
+		// Serial.println(number);
 
 		lixie.update(number);
 

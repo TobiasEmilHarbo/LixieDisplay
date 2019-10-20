@@ -8,13 +8,14 @@ class LixieDigitTransition
 {
   public:
     LixieDigitTransition();
-    virtual void transitionTo(LixieDigit* digits[10], int number, uint32_t color);
+    virtual void transitionTo(LixieDigit* digits[10], int number);
     virtual void tick();
     bool isDirty();
   protected:
+    unsigned long _lastTick;
     LixieDigit** _digits;
     int _transitionIndex;
-    uint32_t _color;
+    int _tickLength;
     int _fromIndex;
     int _toIndex;
     bool _dirty;

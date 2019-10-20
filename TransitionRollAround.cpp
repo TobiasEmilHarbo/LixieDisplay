@@ -8,21 +8,22 @@ TransitionRollAround::TransitionRollAround()
 	Serial.begin(115200);
 }
 
-void TransitionRollAround::transitionTo(LixieDigit* digits[10], int number, uint32_t color)
+void TransitionRollAround::transitionTo(LixieDigit* digits[10], int number)
 {
-	_color 	= color;
 	_digits = digits;
 
 	_fromIndex 	= _toIndex;
 	_toIndex 	= number;
 	_transitionIndex = _fromIndex;
+
+	_tickLength = 20;
 }
 
 void TransitionRollAround::tick()
 {
-	int tickLength = 20;
+	_dirty = false;
 
-	if (millis() > _lastTick + tickLength)
+	if (millis() > _lastTick + _tickLength)
 	{
     	_lastTick = millis();
 
@@ -38,7 +39,7 @@ void TransitionRollAround::tick()
 		}
 
 		if (_digits[_transitionIndex] != NULL)
-			_digits[_transitionIndex]->turnOn(_color);
+			_digits[_transitionIndex]->turnOn();
 
 		_dirty = true;
 	}
