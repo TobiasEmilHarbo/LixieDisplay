@@ -31,9 +31,6 @@ void LixieDigitTransition::tick()
 		else _digits[i]->turnOff();
 	}
 
-	// if (_digits[_toIndex] != NULL)
-	// 	_digits[_toIndex]->turnOn();
-
 	_transitionIndex = _toIndex;
 
 	_dirty = true;

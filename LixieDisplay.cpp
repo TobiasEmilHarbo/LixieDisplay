@@ -15,7 +15,7 @@ LixieDisplay::LixieDisplay(int digits)
 
 	for (int i = 0; i < _numOfDigits; ++i)
 	{
-		_digitPositions[i] = new LixieDigitPosition(i, 2, 10, defaultColor); 
+		_digitPositions[i] = new LixieDigitPosition(i, 2, 10); 
 	}
 }
 
@@ -33,41 +33,6 @@ void LixieDisplay::setup(Adafruit_NeoPixel * pixels)
 
 	_pixels->setBrightness(50);
 	_pixels->show(); // Initialize all pixels to 'off'
-}
-
-void LixieDisplay::setColor(uint32_t color)
-{
-	for (int i = 0; i < _numOfDigits; ++i)
-	{
-		if (_digitPositions[i] != NULL)
-	 		_digitPositions[i]->setColor(color);
-	}
-
-	_pixels->show();
-}
-
-void LixieDisplay::setColors(uint32_t colors[])
-{
-	for (int i = 0; i < _numOfDigits; ++i)
-	{
-		if(colors[i] == NULL) return;
-		if(_digitPositions[i] == NULL) return;
-
-		_digitPositions[i]->setColor(colors[i]);
-
-		// Serial.print("color[");
-		// Serial.print(i);
-		// Serial.print("] is not NULL: ");
-		// Serial.println((colors[i] != NULL));
-		// Serial.println(colors[i]);
-		
-		// Serial.print("_digitPositions[");
-		// Serial.print(i);
-		// Serial.print("] is not NULL: ");
-		// Serial.println((_digitPositions[i] != NULL));
-	}
-
-	_pixels->show();
 }
 
 void LixieDisplay::setTransitionForDigit(int position, LixieDigitTransition * transition)
