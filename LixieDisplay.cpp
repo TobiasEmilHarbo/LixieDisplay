@@ -41,7 +41,7 @@ void LixieDisplay::setTransitionForDigit(int position, LixieDigitTransition * tr
 		_digitPositions[position]->setTransition(transition);
 }
 
-void LixieDisplay::update(String number)
+void LixieDisplay::update(String number, bool force)
 {
 	int digitCount = number.length();
 	char digits[digitCount];
@@ -56,8 +56,10 @@ void LixieDisplay::update(String number)
 		int digit = digits[i] - '0'; // convert char to int
 
 		if (_digitPositions[padding+i] != NULL)
-	 		_digitPositions[padding+i]->update(digit);
+			_digitPositions[padding+i]->update(digit);
 	}
+
+	if(force) this->tick();
 }
 
 int LixieDisplay::pixelCount()

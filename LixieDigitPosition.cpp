@@ -35,7 +35,7 @@ void LixieDigitPosition::setup(Adafruit_NeoPixel * pixels)
 		 	_digits[i]->setPixels(_pixels);
 	}
 
-	_transition 	= new TransitionRoll();
+	_transition 	= new LixieDigitTransition();
 	_colorEffect 	= new ColorEffectRainbow(_digits);
 
 	_colorEffect->setColor(244,212,66);

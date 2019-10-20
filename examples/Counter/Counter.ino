@@ -55,7 +55,7 @@ void setup()
 
 	while ( WiFi.status() != WL_CONNECTED )
 	{
-		lixie.update(String(counter));
+		lixie.update(String(counter), true);
 		counter++;
 		delay(500);
 	}

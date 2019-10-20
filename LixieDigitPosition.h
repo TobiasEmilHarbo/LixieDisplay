@@ -13,9 +13,9 @@ class LixieDigitPosition
     LixieDigitPosition(int index, int digitWidth, int base);
     void setup(Adafruit_NeoPixel* pixels);
     void setPixels(Adafruit_NeoPixel* pixels);
-    int pixelCount();
     void setTransition(LixieDigitTransition* transition);
     void update(int number);
+    int pixelCount();
     bool isDirty();
     void tick();
   private:

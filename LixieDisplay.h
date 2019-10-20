@@ -13,7 +13,7 @@ class LixieDisplay
     void setup(Adafruit_NeoPixel* pixels);
     int pixelCount();
     void setTransitionForDigit(int position, LixieDigitTransition* transition);
-    void update(String number);
+    void update(String number, bool force = false);
     void turnOff();
     void tick();
   private:
