@@ -5,6 +5,7 @@
 #include "Adafruit_NeoPixel.h"
 #include "LixieDigitPosition.h"
 #include "LixieDigitTransition.h"
+#include "LixieDigitDisplayEffect.h"
 
 class LixieDisplay
 {
@@ -17,6 +18,7 @@ class LixieDisplay
     void turnOff();
     void tick();
   private:
+    LixieDigitDisplayEffect* _displayEffect;
     int _numOfDigits;
     Adafruit_NeoPixel* _pixels;
     LixieDigitPosition* _digitPositions[10];

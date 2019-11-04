@@ -7,7 +7,7 @@ ColorEffectRainbow::ColorEffectRainbow(LixieDigit* digits[10]): LixieDigitColorE
 	
 	_digits = digits;
 
-	_tickLength = 30;
+	_tickLength = 70;
 
 	_red = 255;
 	_green = 0;

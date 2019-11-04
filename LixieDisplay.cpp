@@ -1,6 +1,7 @@
 #include "Arduino.h"
 #include "LixieDisplay.h"
 #include "LixieDigitPosition.h"
+#include "LixieDigitDisplayEffect.h"
 #include "LixieDigitTransition.h"
 
 #include "Adafruit_NeoPixel.h"
@@ -17,6 +18,8 @@ LixieDisplay::LixieDisplay(int digits)
 	{
 		_digitPositions[i] = new LixieDigitPosition(i, 2, 10); 
 	}
+
+	_displayEffect = new LixieDigitDisplayEffect();
 }
 
 void LixieDisplay::setup(Adafruit_NeoPixel * pixels)
@@ -43,20 +46,32 @@ void LixieDisplay::setTransitionForDigit(int position, LixieDigitTransition * tr
 
 void LixieDisplay::update(String number, bool force)
 {
-	int digitCount = number.length();
-	char digits[digitCount];
+	String display = _displayEffect->format(number, _numOfDigits);
 
-	int diff = _numOfDigits - digitCount;
-	int padding = (diff > 0) ? diff : 0;
+	//int digitCount = number.length();
+	//char digits[digitCount];
 
-	number.toCharArray(digits, digitCount+1);
+	// int diff = _numOfDigits - digitCount;
+	// int padding = (diff > 0) ? diff : 0;
 
-	for (int i = 0; i < digitCount; ++i)
+	//display.toCharArray(digits, digitCount);
+
+	// for(char& digit : number) {
+
+	// char digits = display;
+
+	// for (int i = 0; i < digitCount; ++i)
+	// for(int i = 0; digits[i] != '\0'; ++i)
+	int place = 0;
+
+	for (char &d: display)
 	{
-		int digit = digits[i] - '0'; // convert char to int
+		int digit = d - '0'; // convert char to int
 
-		if (_digitPositions[padding+i] != NULL)
-			_digitPositions[padding+i]->update(digit);
+		if (_digitPositions[place] != NULL)
+			_digitPositions[place]->update(digit);
+
+		place++;
 	}
 
 	if(force) this->tick();

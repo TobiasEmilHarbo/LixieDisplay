@@ -39,7 +39,7 @@ int UTC = 1; // timezone
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", UTC * 3600, 60000);
 
 unsigned long lastSecTick = 0;
-int oneSec = 1000;
+int oneSec = 4000;
 
 int counter = 0;
 
@@ -79,7 +79,7 @@ void loop()
 
 		char number[6];
 		// sprintf(number, "%02d%02d", m, s);
-		sprintf(number, "%02d%02d", counter, 0);
+		sprintf(number, "%03d", counter);
 		// sprintf(number, "%03d", random(1000));
 
 		// Serial.println(number);
@@ -88,10 +88,10 @@ void loop()
 
 		counter++;
 
-		if(counter > 99) counter = 0;
-
 		//Serial.println(timeClient.getFormattedTime());
 	}
 
 	lixie.tick();
+
+	delay(100);
 }

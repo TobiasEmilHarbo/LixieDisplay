@@ -14,10 +14,10 @@ class LixieDigitTransition
   protected:
     unsigned long _lastTick;
     LixieDigit** _digits;
-    int _transitionIndex;
+    int _transitionIndex = -1;
     int _tickLength;
     int _fromIndex;
-    int _toIndex;
+    int _toIndex = -1;
     bool _dirty;
 };
 
